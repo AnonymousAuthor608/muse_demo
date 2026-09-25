@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUSE — Anonymous Supplementary Material</title>
+  <meta name="description" content="MUSE: Agentic 3D Scene Authoring via Memory-Grounded Incremental Requirement Satisfaction">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="no-referrer">
+  <link rel="preload" as="image" href="static/figures/hero-scenes.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="static/demo/12_bedroom_replace_bench_with_bookshelf/stage2-diag.png">
+  <link rel="stylesheet" href="style.css?v=send-edit-20260925">
+  <link rel="stylesheet" href="demo.css?v=send-edit-20260925">
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top">MUSE</a>
+      <div class="nav-links">
+        <a href="#demo">Demo</a>
+        <a href="#abstract">Abstract</a>
+        <a href="#method">Method</a>
+        <a href="#benchmark">AuthorBench</a>
+        <a href="#results">Results</a>
+        <a href="#gallery">Gallery</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="studio-hero" id="top">
+    <div class="studio-hero-inner">
+      <section class="hero-copy" aria-labelledby="paper-title">
+        <p class="venue">Anonymous Supplementary Material</p>
+        <h1 id="paper-title">MUSE: Agentic 3D Scene Authoring via Memory-Grounded Incremental Requirement Satisfaction</h1>
+        <p class="hero-summary">
+          Creating 3D scenes, as simple as a conversation.
+        </p>
+
+        <div class="actions">
+          <a class="button primary" href="#demo">Explore the Demo</a>
+          <a class="button" href="#gallery">View Comparisons</a>
+        </div>
+
+        <div class="hero-highlights">
+          <span><strong>80.7%</strong> All-Goal Success</span>
+          <span><strong>99.9%</strong> Preservation</span>
+          <span><strong>145</strong> Test Cases</span>
+        </div>
+      </section>
+    </div>
+  </header>
+
+  <section class="demo-section" id="demo" aria-labelledby="demo-heading">
+    <div class="demo-section-inner">
+      <div class="demo-intro">
+        <div><p class="demo-eyebrow">INTERACTIVE EXAMPLES</p><h2 id="demo-heading">One instruction. A visible change.</h2></div>
+        <p>Explore 14 curated scene sequences. Choose an example, send its instruction, and see what changes.</p>
+      </div>
+      <div class="demo-console">
+        <aside class="case-rail" aria-label="Choose an example">
+          <div class="rail-heading"><span>Explore examples</span><span data-demo-case-count>14 cases</span></div>
+          <select class="case-select" data-demo-case-select aria-label="Select example"></select>
+          <div class="case-list" data-demo-case-list></div>
+        </aside>
+        <div class="demo-workspace">
+          <div class="workspace-header">
+            <div><p class="workspace-kicker" data-demo-meta></p><h3 data-demo-title></h3></div>
+            <span class="demo-step-count" data-demo-step-count></span>
+          </div>
+          <div class="viewer-surface" data-demo-surface>
+            <div class="media-toolbar">
+              <div class="tab-row" data-demo-view-tabs role="tablist" aria-label="Scene view"></div>
+              <div class="viewer-actions">
+                <button type="button" class="viewer-button" data-demo-reset>Reset view</button>
+                <button type="button" class="viewer-button" data-demo-fullscreen>Fullscreen</button>
+              </div>
+            </div>
+            <div class="demo-media" data-demo-image-wrap hidden>
+              <div class="before-after">
+                <img class="compare-image compare-before" data-demo-before-image alt="" >
+                <div class="compare-after" data-demo-after-clip><img class="compare-image" data-demo-after-image alt=""></div>
+                <div class="compare-divider" data-demo-compare-divider aria-hidden="true"><span>↔</span></div>
+                <div class="compare-labels"><span data-demo-before-label>Before</span><span data-demo-after-label>After</span></div>
+                <input class="compare-range" type="range" min="0" max="100" value="50" data-demo-compare-range aria-label="Before and after comparison">
+              </div>
+            </div>
+            <div class="demo-model" data-demo-model-wrap>
+              <div class="model-canvas" data-demo-model></div>
+              <div class="model-overlay" data-demo-model-overlay data-state="idle">
+                <div class="model-status-row"><span data-demo-model-status>Loading scene…</span><strong data-demo-model-progress-text></strong></div>
+                <div class="model-progress" role="progressbar" aria-label="Scene loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-demo-model-progress><span data-demo-model-progress-bar></span></div>
+                <p class="model-hint" data-demo-model-hint>Drag to orbit · scroll to zoom</p>
+              </div>
+            </div>
+            <p class="viewer-feedback" data-demo-feedback role="status"></p>
+          </div>
+          <div class="edit-story" aria-live="polite">
+            <span class="edit-story-label" data-demo-stage-label></span>
+            <p data-demo-instruction></p>
+          </div>
+          <form class="edit-composer" data-demo-composer>
+            <label for="edit-command">Example instruction <span data-demo-command-step></span></label>
+            <textarea id="edit-command" data-demo-command readonly rows="3" aria-describedby="command-hint"></textarea>
+            <div class="composer-footer">
+              <span id="command-hint">Send the preset instruction to see its result.</span>
+              <button type="submit" class="button primary" data-demo-send>Send instruction <span aria-hidden="true">↑</span></button>
+            </div>
+            <p class="command-status" data-demo-command-status role="status"></p>
+          </form>
+          <div class="sequence-controls">
+            <button type="button" class="viewer-button" data-demo-previous>Previous</button>
+            <div class="stage-filmstrip" data-demo-stage-filmstrip aria-label="Sequence stages"></div>
+            <button type="button" class="viewer-button" data-demo-replay>Replay edit</button>
+            <button type="button" class="viewer-button" data-demo-play>Play all</button>
+          </div>
+          <details class="instruction-details"><summary>Full instruction</summary><p data-demo-prompt></p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section reveal" id="abstract">
+      <div class="container narrow">
+        <h2>Abstract</h2>
+        <p>
+          Text-driven 3D scene generation is a promising technique for digital content creation,
+          embodied AI simulation, and interactive design, yet practical workflows often require
+          refining, extending, or correcting existing scenes while preserving non-target content.
+          Existing methods can produce realistic and structurally plausible scenes, but they
+          generally lack editability with requirement-level state tracking, so part-level failures
+          often lead to full-scene regeneration or manual intervention. To tackle this challenge,
+          we formulate controllable 3D scene authoring as incremental requirement satisfaction,
+          unifying construction and editing. In this paper, we present <strong>MUSE</strong>, a
+          memory-grounded multi-agent framework in which an Architect compiles instructions into
+          structured requirements, a Sculptor executes local scene operations, and an Inspector
+          verifies each step while updating Working, Scene, and Skill Memory.
+        </p>
+        <p>
+          To evaluate requirement-level controllability and preservation-aware editing, we
+          introduce AuthorBench, offering 145 constrained construction cases and a 1,584-case
+          preservation-aware editing pool paired with external structured checks. On full
+          construction cases, <strong>MUSE</strong> improves All-Goal success from 37.9 to 80.7
+          and surface-constraint fulfillment from 35.0 to 93.3 over the strongest baseline. On a
+          stratified 240-case editing test split, <strong>MUSE</strong> achieves 76.7 All-Goal
+          success, 99.9 preservation rate, and only 0.6 unintended change rate. Beyond automated
+          metrics, human evaluations on compared local-editing baselines support stronger
+          alignment with user intent, and downstream navigation-proxy tests indicate stronger
+          spatial stability. Combined with ablations validating our memory designs, these results
+          establish MUSE as an effective framework for controllable 3D scene authoring.
+        </p>
+      </div>
+    </section>
+
+    <section class="section alt reveal" id="method">
+      <div class="wide">
+        <h2>Method</h2>
+        <p class="section-lead">
+          MUSE turns scene creation and editing into a closed-loop authoring process over
+          explicit requirements and persistent memory.
+        </p>
+        <figure class="figure-block">
+          <img src="static/figures/pipeline.png" alt="MUSE pipeline overview">
+          <figcaption>
+            The Architect compiles instructions into a structured requirement program, the
+            Sculptor performs focused local actions with protection-aware repair, and the
+            Inspector verifies progress while consolidating Working and Scene Memory.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section reveal" id="benchmark">
+      <div class="wide">
+        <h2>AuthorBench</h2>
+        <p class="section-lead">
+          AuthorBench evaluates requirement-level scene authoring across construction and
+          preservation-aware editing, using structured external checks rather than internal
+          model state.
+        </p>
+        <div class="split">
+          <figure class="figure-block compact">
+            <img src="static/figures/benchmark.png" alt="AuthorBench benchmark overview">
+          </figure>
+          <div class="metric-grid">
+            <div class="metric">
+              <span class="metric-value">145</span>
+              <span class="metric-label">construction cases</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">1,584</span>
+              <span class="metric-label">editing pool cases</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">240</span>
+              <span class="metric-label">fixed editing split</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">720</span>
+              <span class="metric-label">preservation checks</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt reveal" id="results">
+      <div class="wide">
+        <h2>Results</h2>
+        <p class="section-lead">
+          MUSE improves completion while preserving non-target scene content and maintaining
+          physical validity.
+        </p>
+
+        <div class="result-grid">
+          <article class="result-card">
+            <h3>Construction</h3>
+            <p class="big-number">80.7%</p>
+            <p>All-Goal success, compared with 37.9% for the strongest one-shot baseline.</p>
+          </article>
+          <article class="result-card">
+            <h3>Surface Constraints</h3>
+            <p class="big-number">93.3%</p>
+            <p>Surface fulfillment, addressing a major weakness of prior layout methods.</p>
+          </article>
+          <article class="result-card">
+            <h3>Editing Locality</h3>
+            <p class="big-number">99.9%</p>
+            <p>Preservation rate with only 0.6% unintended change rate.</p>
+          </article>
+          <article class="result-card">
+            <h3>Editing</h3>
+            <p class="big-number">76.7%</p>
+            <p>All-Goal success on the fixed 240-case editing split.</p>
+          </article>
+        </div>
+
+        <div class="paper-table-grid" aria-label="Main paper result tables">
+          <article class="paper-table-card construction-table">
+            <div class="paper-table-head">
+              <h3>Main Construction Results</h3>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Method</th>
+                    <th>Obj.</th>
+                    <th>Rel.</th>
+                    <th>Surf.</th>
+                    <th>Zone</th>
+                    <th>Macro</th>
+                    <th>All-Goal</th>
+                    <th>OOB</th>
+                    <th>Col.</th>
+                  </tr>
+                </thead>
+                <tbody>
+<tr><th scope="row">LayoutGPT</th><td>98.4</td><td>83.8</td><td>35.0</td><td>79.0</td><td>74.1</td><td>37.9</td><td>1.4</td><td>2.3</td></tr>
+<tr><th scope="row">Holodeck</th><td>83.3</td><td>57.6</td><td>21.5</td><td>30.9</td><td>48.3</td><td>14.5</td><td>0.0</td><td>0.0</td></tr>
+<tr><th scope="row">LayoutVLM</th><td>98.0</td><td>69.7</td><td>22.1</td><td>59.3</td><td>62.3</td><td>26.9</td><td>0.0</td><td>0.0</td></tr>
+<tr><th scope="row">ReSpace</th><td>71.9</td><td>36.4</td><td>8.6</td><td>32.1</td><td>37.3</td><td>11.0</td><td>0.4</td><td>0.5</td></tr>
+<tr><th scope="row">SceneReVis</th><td>46.9</td><td>17.2</td><td>9.2</td><td>8.6</td><td>20.5</td><td>2.1</td><td>0.3</td><td>0.9</td></tr>
+<tr class="ours-row"><th scope="row">MUSE</th><td>99.6</td><td>96.0</td><td>93.3</td><td>85.2</td><td>93.5</td><td>80.7</td><td>0.0</td><td>0.1</td></tr>
+</tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="paper-table-card editing-table">
+            <div class="paper-table-head">
+              <h3>Main Editing Results</h3>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Method</th>
+                    <th>Obj.</th>
+                    <th>Rel.</th>
+                    <th>Surf.</th>
+                    <th>Macro</th>
+                    <th>All-Goal</th>
+                    <th>PR</th>
+                    <th>UCR</th>
+                    <th>OOB</th>
+                    <th>Col.</th>
+                  </tr>
+                </thead>
+                <tbody>
+<tr><th scope="row">LayoutGPT-E</th><td>86.0</td><td>21.1</td><td>19.3</td><td>42.2</td><td>36.2</td><td>25.1</td><td>95.7</td><td>1.8</td><td>5.2</td></tr>
+<tr><th scope="row">Edit-As-Act</th><td>30.6</td><td>14.1</td><td>5.0</td><td>16.6</td><td>5.4</td><td>84.9</td><td>17.8</td><td>0.2</td><td>0.5</td></tr>
+<tr><th scope="row">SceneReVis</th><td>33.6</td><td>28.2</td><td>4.2</td><td>22.0</td><td>10.4</td><td>92.6</td><td>5.9</td><td>0.8</td><td>2.1</td></tr>
+<tr><th scope="row">ReSpace-E</th><td>46.3</td><td>19.7</td><td>5.9</td><td>24.0</td><td>11.2</td><td>100.0</td><td>1.9</td><td>1.2</td><td>3.5</td></tr>
+<tr class="ours-row"><th scope="row">MUSE</th><td>79.0</td><td>74.7</td><td>89.9</td><td>81.2</td><td>76.7</td><td>99.9</td><td>0.6</td><td>0.1</td><td>0.3</td></tr>
+</tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+
+        <figure class="figure-block tradeoff-figure">
+          <img src="static/figures/editing-tradeoff.png" alt="Completion-locality trade-off plot">
+          <figcaption>
+            MUSE occupies the preferred region of higher fulfillment and lower unintended changes.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section reveal" id="gallery">
+      <div class="wide">
+        <h2>Qualitative Comparisons</h2>
+        <p class="section-lead">
+          MUSE produces organized layouts in construction and performs precise local edits
+          without rewriting protected scene context.
+        </p>
+
+        <figure class="figure-block">
+          <img src="static/figures/qualitative-main.png" alt="Main qualitative construction and editing comparison">
+          <figcaption>Main qualitative comparisons showing MUSE's ability to construct organized layouts and perform precise preservation-aware edits.</figcaption>
+        </figure>
+
+        <figure class="figure-block">
+          <img src="static/figures/qualitative-construction.png" alt="Additional construction examples">
+          <figcaption>Additional construction comparisons under multi-object spatial and support constraints.</figcaption>
+        </figure>
+
+        <figure class="figure-block">
+          <img src="static/figures/qualitative-editing.png" alt="Additional preservation-aware editing examples">
+          <figcaption>Additional preservation-aware editing cases with coupled replacement, movement, and insertion.</figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>MUSE · Anonymous Supplementary Material</p>
+    </div>
+  </footer>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./static/vendor/three/build/three.module.js",
+        "three/addons/": "./static/vendor/three/examples/jsm/"
+      }
+    }
+  </script>
+  <script src="static/demo-cases.js?v=send-edit-20260925"></script>
+  <script type="module" src="static/demo-viewer.js?v=send-edit-20260925"></script>
+  <script src="static/animations.js"></script>
+</body>
+</html>
